@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using BookStore.Domain.Entities;
 
-namespace BookStore.Domain.Entities;
+namespace BookStore.Application.Book;
 
-public class Book
+public class BookDto
 {
-    public int Id { get; set; }
     public string Title { get; set; } = default!;
     public string? Description { get; set; }
     public Genre Genre { get; set; }
@@ -13,7 +12,4 @@ public class Book
     public int PageNumbers { get; set; }
     public DateTime PublishedDate { get; set; } = DateTime.UtcNow;
     public Author Author { get; set; }
-    public string? CreatedById { get; set; }
-    public IdentityUser? CreatedBy { get; set; }
-
 }
