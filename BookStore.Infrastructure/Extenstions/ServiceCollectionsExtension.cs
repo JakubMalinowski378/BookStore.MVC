@@ -20,5 +20,6 @@ public static class ServiceCollectionsExtension
             .AddEntityFrameworkStores<BookStoreDbContext>();
 
         services.AddScoped<IBookRepository, BookRepository>();
+        services.AddScoped<IAuthorRepository, AuthorRepository>();
     }
 }

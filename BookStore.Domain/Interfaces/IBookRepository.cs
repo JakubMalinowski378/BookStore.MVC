@@ -4,5 +4,6 @@ namespace BookStore.Domain.Interfaces;
 
 public interface IBookRepository
 {
-    Task<List<Book>> GetAll();
+    Task<IEnumerable<Book>> GetAll();
+    Task Create(Book book);
 }

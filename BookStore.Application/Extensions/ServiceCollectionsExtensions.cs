@@ -1,4 +1,5 @@
-﻿using BookStore.Application.Book.Queries.GetBooks;
+﻿using BookStore.Application.ApplicationUser;
+using BookStore.Application.Book.Queries.GetBooks;
 using BookStore.Application.Mappings;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,5 +13,7 @@ public static class ServiceCollectionsExtensions
         services.AddMediatR(typeof(GetBooksQuery));
 
         services.AddAutoMapper(typeof(BookMappingProfile));
+
+        services.AddScoped<IUserContext, UserContext>();
     }
 }

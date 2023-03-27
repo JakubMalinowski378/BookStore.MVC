@@ -14,6 +14,13 @@ public class BookRepository : IBookRepository
         _dbContext = dbContext;
     }
 
-    public async Task<List<Book>> GetAll()
-        => await _dbContext.Books.ToListAsync();
+    public async Task Create(Book book)
+    {
+        _dbContext.Add(book);
+        await _dbContext.SaveChangesAsync();
+    }
+
+    public async Task<IEnumerable<Book>> GetAll()
+        => await _dbContext.Books.Include("Author")
+        .ToListAsync();
 }

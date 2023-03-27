@@ -9,5 +9,7 @@ public class BookMappingProfile : Profile
 	{
 		CreateMap<Domain.Entities.Book, BookDto>()
 			.ReverseMap();
+
+		CreateMap<CreateBookDto, Domain.Entities.Book>();
 	}
 }

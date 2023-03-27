@@ -9,10 +9,10 @@ public class Book
     public string? Description { get; set; }
     public Genre Genre { get; set; }
     public Language Language { get; set; }
-    public string Publisher { get; set; } = default!;
     public int PageNumbers { get; set; }
     public DateTime PublishedDate { get; set; } = DateTime.UtcNow;
-    public Author Author { get; set; }
+    public int AuthorId { get; set; }
+    public Author Author { get; set; } = new();
     public string? CreatedById { get; set; }
     public IdentityUser? CreatedBy { get; set; }
 

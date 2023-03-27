@@ -25,13 +25,13 @@
                 @Html.DisplayNameFor(model => model.Language)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Publisher)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.PageNumbers)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.PublishedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AuthorId)
             </th>
             <th></th>
         </tr>
@@ -52,13 +52,16 @@
                 @Html.DisplayFor(modelItem => item.Language)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Publisher)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.PageNumbers)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PublishedDate)
+            </td>
+            <td>
+                <a href="#">
+                    @Html.DisplayFor(modelItem => item.Author.FirstName)
+                    @Html.DisplayFor(modelItem => item.Author.LastName)
+                </a>
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
