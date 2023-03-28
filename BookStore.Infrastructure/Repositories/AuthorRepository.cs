@@ -14,6 +14,9 @@ public class AuthorRepository : IAuthorRepository
         _dbContext = dbContext;
     }
 
+    public async Task Commit()
+        => await _dbContext.SaveChangesAsync();
+
     public async Task Create(Author author)
     {
         _dbContext.Add(author);

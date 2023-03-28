@@ -2,7 +2,7 @@
 using BookStore.Domain.Interfaces;
 using MediatR;
 
-namespace BookStore.Application.Author.Commands;
+namespace BookStore.Application.Author.Commands.CreateAuthor;
 
 public class CreateAuthorCommandHandler : IRequestHandler<CreateAuthorCommand>
 {

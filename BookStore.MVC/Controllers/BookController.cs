@@ -1,9 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using BookStore.Application.Author.Queries;
 using BookStore.Application.Book.Queries.GetBooks;
 using BookStore.Application.Book.Commands.CreateBook;
+using BookStore.Application.Author.Queries.GetAuthors;
 
 namespace BookStore.MVC.Controllers;
 
@@ -18,14 +18,14 @@ public class BookController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var books = await _mediator.Send(new GetBooksQuery());
+        var books = await _mediator.Send(new GetAllBooksQuery());
         return View(books);
     }
 
     [HttpGet]
     public async Task<IActionResult> Create()
     {
-        var authorsCredentials = await _mediator.Send(new GetAuthorsQuery());
+        var authorsCredentials = await _mediator.Send(new GetAllAuthorsQuery());
         ViewData["Authors"] = new SelectList(authorsCredentials, "Id", "LastName");
         return View();
     }
@@ -35,7 +35,7 @@ public class BookController : Controller
     {
         if (!ModelState.IsValid)
         {
-            var authorsCredentials = await _mediator.Send(new GetAuthorsQuery());
+            var authorsCredentials = await _mediator.Send(new GetAllAuthorsQuery());
             ViewData["Authors"] = new SelectList(authorsCredentials, "Id", "LastName");
             return View(command);
         }

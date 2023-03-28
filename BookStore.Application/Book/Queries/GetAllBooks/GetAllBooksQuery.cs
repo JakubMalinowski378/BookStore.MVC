@@ -2,7 +2,7 @@
 
 namespace BookStore.Application.Book.Queries.GetBooks;
 
-public class GetBooksQuery : IRequest<IEnumerable<BookDto>>
+public class GetAllBooksQuery : IRequest<IEnumerable<BookDto>>
 {
 
 }
