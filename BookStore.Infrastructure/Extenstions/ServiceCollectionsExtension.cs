@@ -24,5 +24,7 @@ public static class ServiceCollectionsExtension
         services.AddScoped<IBookRepository, BookRepository>();
         services.AddScoped<IGenreRepository, GenreRepository>();
         services.AddScoped<ILanguageRepository, LanguageRepository>();
+		
+		services.AddScoped<Seeder>();
     }
 }
