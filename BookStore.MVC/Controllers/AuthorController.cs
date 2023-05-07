@@ -45,7 +45,6 @@ public class AuthorController : Controller
     [Route("Author/{id}/Edit")]
     public async Task<IActionResult> Edit(int id)
     {
-        
         var author = await _mediator.Send(new GetAuthorByIdCommand() { Id = id });
         if(author == null)
         {

@@ -30,7 +30,10 @@ public class BookController : Controller
         var authorsCredentials = await _mediator.Send(new GetAllAuthorsQuery());
         var genres = await _mediator.Send(new GetAllGenresQuery());
         var languages = await _mediator.Send(new GetAllLanguagesQuery());
-        ViewData["Authors"] = new SelectList(authorsCredentials, "Id", "LastName");
+        ViewData["Authors"] = new SelectList(
+            authorsCredentials.Select(a =>
+            new { a.Id, FirstAndLastName=$"{a.FirstName} {a.LastName}" }
+            ), "Id", "FirstAndLastName");
         ViewData["Genres"] = new SelectList(genres, "Id", "Genre");
         ViewData["Languages"] = new SelectList(languages, "Id", "Language");
         return View();
