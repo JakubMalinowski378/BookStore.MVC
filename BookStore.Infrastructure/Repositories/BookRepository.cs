@@ -21,6 +21,9 @@ public class BookRepository : IBookRepository
     }
 
     public async Task<IEnumerable<Books>> GetAll()
-        => await _dbContext.Books.Include("Author")
+        => await _dbContext.Books
+        .Include("Author")
+        .Include("Genres")
+        .Include("Language")
         .ToListAsync();
 }
