@@ -1,6 +1,7 @@
 ﻿using BookStore.Domain.Interfaces;
 using BookStore.Infrastructure.Persistance;
 using BookStore.Infrastructure.Repositories;
+using BookStore.Infrastructure.Seeders;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -19,7 +20,9 @@ public static class ServiceCollectionsExtension
             .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<BookStoreDbContext>();
 
-        services.AddScoped<IBookRepository, BookRepository>();
         services.AddScoped<IAuthorRepository, AuthorRepository>();
+        services.AddScoped<IBookRepository, BookRepository>();
+        services.AddScoped<IGenreRepository, GenreRepository>();
+        services.AddScoped<ILanguageRepository, LanguageRepository>();
     }
 }

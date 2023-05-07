@@ -4,7 +4,7 @@ using MediatR;
 
 namespace BookStore.Application.Author.Queries.GetAuthors;
 
-public class GetAllAuthorsQueryHandler : IRequestHandler<GetAllAuthorsQuery, IEnumerable<Domain.Entities.Author>>
+public class GetAllAuthorsQueryHandler : IRequestHandler<GetAllAuthorsQuery, IEnumerable<Domain.Entities.Authors>>
 {
     private readonly IAuthorRepository _authorRepository;
 
@@ -13,7 +13,7 @@ public class GetAllAuthorsQueryHandler : IRequestHandler<GetAllAuthorsQuery, IEn
         _authorRepository = authorRepository;
     }
 
-    public async Task<IEnumerable<Domain.Entities.Author>> Handle(GetAllAuthorsQuery request, CancellationToken cancellationToken)
+    public async Task<IEnumerable<Domain.Entities.Authors>> Handle(GetAllAuthorsQuery request, CancellationToken cancellationToken)
     {
         var authors = await _authorRepository.GetAll();
 

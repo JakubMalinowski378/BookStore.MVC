@@ -4,8 +4,8 @@ namespace BookStore.Domain.Interfaces;
 
 public interface IAuthorRepository
 {
-    Task<IEnumerable<Author>> GetAll();
-    Task Create(Domain.Entities.Author author);
-    Task<Author?> GetById(int id);
+    Task<IEnumerable<Authors>> GetAll();
+    Task Create(Authors author);
+    Task<Authors?> GetById(int id);
     Task Commit();
 }

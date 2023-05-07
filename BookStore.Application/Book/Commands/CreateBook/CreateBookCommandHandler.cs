@@ -26,7 +26,7 @@ public class CreateBookCommandHandler : IRequestHandler<CreateBookCommand>
         {
             return Unit.Value;
         }
-        var book = _mapper.Map<Domain.Entities.Book>(request);
+        var book = _mapper.Map<Domain.Entities.Books>(request);
 
         var author = await _authorRepository.GetById(request.AuthorId);
 
@@ -35,7 +35,7 @@ public class CreateBookCommandHandler : IRequestHandler<CreateBookCommand>
             return Unit.Value;
         }
 
-        book.CreatedById = currentUser.Id;
+        book.UserId = currentUser.Id;
         book.Author = author;
 
         await _bookRepository.Create(book);

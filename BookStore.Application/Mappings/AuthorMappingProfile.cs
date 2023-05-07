@@ -8,10 +8,10 @@ public class AuthorMappingProfile : Profile
 {
 	public AuthorMappingProfile()
 	{
-		CreateMap<Domain.Entities.Author, AuthorDto>()
+		CreateMap<Domain.Entities.Authors, AuthorDto>()
 			.ReverseMap();
 
-		CreateMap<Domain.Entities.Author, EditAuthorCommand>()
+		CreateMap<Domain.Entities.Authors, EditAuthorCommand>()
 			.ReverseMap();
 	}
 }

@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using BookStore.Application.Book.Queries.GetBooks;
 using BookStore.Application.Book.Commands.CreateBook;
 using BookStore.Application.Author.Queries.GetAuthors;
+using BookStore.Application.Genre.Queries.GetAllGenres;
+using BookStore.Application.Languages.Queries.GetAllLanguages;
 
 namespace BookStore.MVC.Controllers;
 
@@ -26,7 +28,11 @@ public class BookController : Controller
     public async Task<IActionResult> Create()
     {
         var authorsCredentials = await _mediator.Send(new GetAllAuthorsQuery());
+        var genres = await _mediator.Send(new GetAllGenresQuery());
+        var languages = await _mediator.Send(new GetAllLanguagesQuery());
         ViewData["Authors"] = new SelectList(authorsCredentials, "Id", "LastName");
+        ViewData["Genres"] = new SelectList(genres, "Id", "Genre");
+        ViewData["Languages"] = new SelectList(languages, "Id", "Language");
         return View();
     }
 

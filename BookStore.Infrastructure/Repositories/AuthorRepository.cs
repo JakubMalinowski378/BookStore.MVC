@@ -17,15 +17,15 @@ public class AuthorRepository : IAuthorRepository
     public async Task Commit()
         => await _dbContext.SaveChangesAsync();
 
-    public async Task Create(Author author)
+    public async Task Create(Authors author)
     {
         _dbContext.Add(author);
         await _dbContext.SaveChangesAsync();
     }
 
-    public async Task<IEnumerable<Author>> GetAll()
+    public async Task<IEnumerable<Authors>> GetAll()
         => await _dbContext.Authors.ToListAsync();
 
-    public async Task<Author?> GetById(int id)
+    public async Task<Authors?> GetById(int id)
         => await _dbContext.Authors.FirstOrDefaultAsync(x => x.Id == id);
 }

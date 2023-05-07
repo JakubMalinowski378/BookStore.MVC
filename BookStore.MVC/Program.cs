@@ -1,5 +1,6 @@
 using BookStore.Application.Extensions;
 using BookStore.Infrastructure.Extenstions;
+using BookStore.Infrastructure.Seeders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,10 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
 
 var app = builder.Build();
+
+var scope = app.Services.CreateScope();
+var seeder = scope.ServiceProvider.GetRequiredService<Seeder>();
+await seeder.Seed();
 
 if (!app.Environment.IsDevelopment())
 {
