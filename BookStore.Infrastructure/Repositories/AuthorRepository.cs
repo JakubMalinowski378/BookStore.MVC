@@ -24,8 +24,12 @@ public class AuthorRepository : IAuthorRepository
     }
 
     public async Task<IEnumerable<Authors>> GetAll()
-        => await _dbContext.Authors.ToListAsync();
+        => await _dbContext.Authors
+        .AsNoTracking()
+        .ToListAsync();
 
     public async Task<Authors?> GetById(int id)
-        => await _dbContext.Authors.FirstOrDefaultAsync(x => x.Id == id);
+        => await _dbContext.Authors
+        .AsNoTracking()
+        .FirstOrDefaultAsync(x => x.Id == id);
 }

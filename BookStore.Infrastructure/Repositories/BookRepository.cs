@@ -22,6 +22,7 @@ public class BookRepository : IBookRepository
 
     public async Task<IEnumerable<Books>> GetAll()
         => await _dbContext.Books
+        .AsNoTracking()
         .Include("Author")
         .Include("Genres")
         .Include("Language")

@@ -15,5 +15,7 @@ public class LanguageRepository : ILanguageRepository
     }
 
     public async Task<IEnumerable<Languages>> GetAll()
-        => await _dbContext.Languages.ToListAsync();
+        => await _dbContext.Languages
+        .AsNoTracking()
+        .ToListAsync();
 }
