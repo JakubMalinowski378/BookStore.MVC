@@ -1,4 +1,5 @@
-﻿using BookStore.Domain.Entities;
+﻿using BookStore.Application.Exceptions;
+using BookStore.Domain.Entities;
 using BookStore.Domain.Interfaces;
 using BookStore.Infrastructure.Persistance;
 using Microsoft.EntityFrameworkCore;
@@ -28,8 +29,15 @@ public class AuthorRepository : IAuthorRepository
         .AsNoTracking()
         .ToListAsync();
 
-    public async Task<Authors?> GetById(int id)
-        => await _dbContext.Authors
+    public async Task<Authors> GetById(int id)
+    {
+        var author = await _dbContext.Authors
         .AsNoTracking()
         .FirstOrDefaultAsync(x => x.Id == id);
+
+        if (author is null)
+            throw new NotFoundException("Author not found");
+
+        return author;
+    }
 }

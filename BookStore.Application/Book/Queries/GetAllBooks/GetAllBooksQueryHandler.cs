@@ -19,7 +19,6 @@ public class GetAllBooksQueryHandler : IRequestHandler<GetAllBooksQuery, IEnumer
     {
         var books = await _bookStoreRepository.GetAll();
         var dtos = _mapper.Map<IEnumerable<BookDto>>(books);
-        
         return dtos;
     }
 }

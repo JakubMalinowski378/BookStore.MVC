@@ -30,6 +30,6 @@ public class BookStoreDbContext : IdentityDbContext
 
 			eb.Property(b => b.Price)
             .HasPrecision(18, 2);
-        });			
+        });
     }
 }

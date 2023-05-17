@@ -15,7 +15,7 @@ public class UserContext : IUserContext
     public CurrentUser? GetCurrentUser()
     {
         var user = _httpContextAccessor?.HttpContext?.User;
-        
+
         if(user == null)
         {
             throw new InvalidOperationException("Context is not present");

@@ -40,7 +40,7 @@ namespace BookStore.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Authors");
+                    b.ToTable("Authors", (string)null);
                 });
 
             modelBuilder.Entity("BookStore.Domain.Entities.Books", b =>
@@ -87,7 +87,7 @@ namespace BookStore.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Books");
+                    b.ToTable("Books", (string)null);
                 });
 
             modelBuilder.Entity("BookStore.Domain.Entities.Genres", b =>
@@ -104,7 +104,7 @@ namespace BookStore.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genres");
+                    b.ToTable("Genres", (string)null);
                 });
 
             modelBuilder.Entity("BookStore.Domain.Entities.Languages", b =>
@@ -121,7 +121,7 @@ namespace BookStore.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Languages");
+                    b.ToTable("Languages", (string)null);
                 });
 
             modelBuilder.Entity("BooksGenres", b =>
@@ -136,7 +136,7 @@ namespace BookStore.Infrastructure.Migrations
 
                     b.HasIndex("GenresId");
 
-                    b.ToTable("BooksGenres");
+                    b.ToTable("BooksGenres", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
