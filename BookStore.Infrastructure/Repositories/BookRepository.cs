@@ -1,4 +1,5 @@
-﻿using BookStore.Domain.Entities;
+﻿using BookStore.Application.Exceptions;
+using BookStore.Domain.Entities;
 using BookStore.Domain.Interfaces;
 using BookStore.Infrastructure.Persistance;
 using Microsoft.EntityFrameworkCore;
@@ -22,9 +23,23 @@ public class BookRepository : IBookRepository
 
     public async Task<IEnumerable<Books>> GetAll()
         => await _dbContext.Books
-        .AsNoTracking()
         .Include("Author")
         .Include("Genres")
         .Include("Language")
         .ToListAsync();
+
+    public async Task<Books> GetById(int id)
+    {
+        var book = await _dbContext.Books
+            .Include("Author")
+            .Include("Genres")
+            .Include("Language")
+            .Include(x => x.User)
+            .FirstOrDefaultAsync(x => x.Id == id);
+        if(book == null)
+        {
+            throw new NotFoundException("Book not found");
+        }
+        return book;
+    }
 }

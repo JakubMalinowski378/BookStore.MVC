@@ -5,9 +5,14 @@ using BookStore.Application.Author.Commands.CreateAuthor;
 using BookStore.Application.Author.Commands.EditAuthor;
 using BookStore.Application.Author.Queries.GetAuthorById;
 using BookStore.Application.Author.Queries.GetAuthors;
+using Microsoft.AspNetCore.Authorization;
+using BookStore.Application.Author.Commands.DeleteAuthor;
+using BookStore.Application.Author.Queries.GetAuthorBooks;
+using BookStore.Application.Exceptions;
 
 namespace BookStore.MVC.Controllers;
 
+[Authorize]
 public class AuthorController : Controller
 {
     private readonly IMediator _mediator;
@@ -20,11 +25,13 @@ public class AuthorController : Controller
     }
 
     [HttpGet]
+    [AllowAnonymous]
     public async Task<IActionResult> Index()
     {
         var authors = await _mediator.Send(new GetAllAuthorsQuery());
         return View(authors);
     }
+
     [HttpGet]
     public IActionResult Create()
     {
@@ -42,10 +49,23 @@ public class AuthorController : Controller
         return RedirectToAction(nameof(Index));
     }
 
+    [HttpGet]
+    [Route("Author/{id}/Details")]
+    public async Task<IActionResult> Details(int id)
+    {
+        var author = await _mediator.Send(new GetAuthorByIdQuery() { Id = id });
+        if (author == null)
+        {
+            return NotFound();
+        }
+        return View(author);
+    }
+
+    [HttpGet]
     [Route("Author/{id}/Edit")]
     public async Task<IActionResult> Edit(int id)
     {
-        var author = await _mediator.Send(new GetAuthorByIdCommand() { Id = id });
+        var author = await _mediator.Send(new GetAuthorByIdQuery() { Id = id });
         if(author == null)
         {
             return NotFound();
@@ -66,5 +86,36 @@ public class AuthorController : Controller
 
         await _mediator.Send(command);
         return RedirectToAction(nameof(Index));
+    }
+
+    [HttpGet]
+    [Route("Author/{id}/Delete")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var author = await _mediator.Send(new GetAuthorByIdQuery() { Id = id });
+        return View(author);
+    }
+
+    [HttpPost]
+    [ActionName("Delete")]
+    [Route("Author/{id}/Delete")]
+    public async Task<IActionResult> DeleteConfirmed(int id)
+    {
+        await _mediator.Send(new DeleteAuthorCommand() { Id = id });
+        return RedirectToAction(nameof(Index));
+    }
+
+    [HttpGet]
+    [Route("Author/{id}/Book")]
+    public async Task<IActionResult> AuthorBooks(int id)
+    {
+        var author = await _mediator.Send(new GetAuthorByIdQuery() { Id = id});
+        if(author == null)
+        {
+            throw new NotFoundException("Author not found");
+        }
+        ViewData["author"] = $"{author.FirstName} {author.LastName}";
+        var books = await _mediator.Send(new GetAuthorBooksQuery() {  Id = id });
+        return View(books);
     }
 }

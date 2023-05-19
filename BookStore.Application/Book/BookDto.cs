@@ -5,6 +5,7 @@ namespace BookStore.Application.Book;
 
 public class BookDto
 {
+    public int Id { get; set; }
     public string Title { get; set; } = default!;
     public string? Description { get; set; }
     public List<Genres> Genres { get; set; } = new();

@@ -8,9 +8,11 @@ using BookStore.Application.Genre.Queries.GetAllGenres;
 using BookStore.Application.Languages.Queries.GetAllLanguages;
 using BookStore.Application.Book;
 using Microsoft.AspNetCore.Authorization;
+using BookStore.Application.Book.Queries.GetBookById;
 
 namespace BookStore.MVC.Controllers;
 
+[Authorize]
 public class BookController : Controller
 {
     private readonly IMediator _mediator;
@@ -20,6 +22,8 @@ public class BookController : Controller
         _mediator = mediator;
     }
 
+    [HttpGet]
+    [AllowAnonymous]
     public async Task<IActionResult> Index()
     {
         var books = await _mediator.Send(new GetAllBooksQuery());
@@ -27,7 +31,6 @@ public class BookController : Controller
     }
 
     [HttpGet]
-    [Authorize]
     public async Task<IActionResult> Create()
     {
         var authorsCredentials = await _mediator.Send(new GetAllAuthorsQuery());
@@ -46,7 +49,6 @@ public class BookController : Controller
     }
 
     [HttpPost]
-    [Authorize]
     public async Task<IActionResult> Create(CreateBookCommand command)
     {
         if (!ModelState.IsValid || command.GenresIds == null)
@@ -64,5 +66,13 @@ public class BookController : Controller
         }
         await _mediator.Send(command);
         return RedirectToAction(nameof(Index));
+    }
+
+    [HttpGet]
+    [Route("Book/{id}/Details")]
+    public async Task<IActionResult> Details(int id)
+    {
+        var book = await _mediator.Send(new GetBookByIdQuery(){ Id = id});
+        return View(book);
     }
 }
