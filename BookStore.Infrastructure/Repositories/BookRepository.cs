@@ -15,20 +15,20 @@ public class BookRepository : IBookRepository
         _dbContext = dbContext;
     }
 
-    public async Task Create(Books book)
+    public async Task Create(Book book)
     {
         _dbContext.Add(book);
         await _dbContext.SaveChangesAsync();
     }
 
-    public async Task<IEnumerable<Books>> GetAll()
+    public async Task<IEnumerable<Book>> GetAll()
         => await _dbContext.Books
         .Include("Author")
         .Include("Genres")
         .Include("Language")
         .ToListAsync();
 
-    public async Task<Books> GetById(int id)
+    public async Task<Book> GetById(int id)
     {
         var book = await _dbContext.Books
             .Include("Author")

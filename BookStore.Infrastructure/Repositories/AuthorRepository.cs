@@ -2,7 +2,6 @@
 using BookStore.Domain.Entities;
 using BookStore.Domain.Interfaces;
 using BookStore.Infrastructure.Persistance;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Infrastructure.Repositories;
@@ -19,7 +18,7 @@ public class AuthorRepository : IAuthorRepository
     public async Task Commit()
         => await _dbContext.SaveChangesAsync();
 
-    public async Task Create(Authors author)
+    public async Task Create(Author author)
     {
         _dbContext.Add(author);
         await _dbContext.SaveChangesAsync();
@@ -36,11 +35,11 @@ public class AuthorRepository : IAuthorRepository
         await _dbContext.SaveChangesAsync();
     }
 
-    public async Task<IEnumerable<Authors>> GetAll()
+    public async Task<IEnumerable<Author>> GetAll()
         => await _dbContext.Authors
         .ToListAsync();
 
-    public async Task<Authors> GetById(int id)
+    public async Task<Author> GetById(int id)
     {
         var author = await _dbContext.Authors
         .FirstOrDefaultAsync(x => x.Id == id);
@@ -51,7 +50,7 @@ public class AuthorRepository : IAuthorRepository
         return author;
     }
 
-    public async Task<IEnumerable<Books>> GetAuthorBooks(int id)
+    public async Task<IEnumerable<Book>> GetAuthorBooks(int id)
     {
         var books = await _dbContext.Books
             .Include(x => x.Author)

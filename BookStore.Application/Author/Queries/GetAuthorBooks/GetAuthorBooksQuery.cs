@@ -3,7 +3,7 @@ using MediatR;
 
 namespace BookStore.Application.Author.Queries.GetAuthorBooks;
 
-public class GetAuthorBooksQuery : IRequest<IEnumerable<Books>>
+public class GetAuthorBooksQuery : IRequest<IEnumerable<Domain.Entities.Book>>
 {
     public int Id { get; set; }
 }

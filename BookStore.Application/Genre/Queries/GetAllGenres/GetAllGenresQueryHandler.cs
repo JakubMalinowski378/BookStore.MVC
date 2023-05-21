@@ -4,7 +4,7 @@ using MediatR;
 
 namespace BookStore.Application.Genre.Queries.GetAllGenres;
 
-public class GetAllGenresQueryHandler : IRequestHandler<GetAllGenresQuery, IEnumerable<Genres>>
+public class GetAllGenresQueryHandler : IRequestHandler<GetAllGenresQuery, IEnumerable<Domain.Entities.Genre>>
 {
     private readonly IGenreRepository _genreRepository;
 
@@ -13,7 +13,7 @@ public class GetAllGenresQueryHandler : IRequestHandler<GetAllGenresQuery, IEnum
         _genreRepository = genreRepository;
     }
 
-    public async Task<IEnumerable<Genres>> Handle(GetAllGenresQuery request, CancellationToken cancellationToken)
+    public async Task<IEnumerable<Domain.Entities.Genre>> Handle(GetAllGenresQuery request, CancellationToken cancellationToken)
     {
         var genres = await _genreRepository.GetAll();
         return genres;

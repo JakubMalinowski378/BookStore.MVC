@@ -2,6 +2,6 @@
 
 namespace BookStore.Application.Author.Queries.GetAuthorById;
 
-public class GetAuthorByIdQuery : Domain.Entities.Authors, IRequest<Domain.Entities.Authors>
+public class GetAuthorByIdQuery : Domain.Entities.Author, IRequest<Domain.Entities.Author>
 {
 }

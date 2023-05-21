@@ -1,7 +1,7 @@
 ﻿namespace BookStore.Domain.Entities;
 
-public class Languages
+public class Language
 {
     public int Id { get; set; }
-    public string Language { get; set; } = default!;
+    public string Value { get; set; } = default!;
 }

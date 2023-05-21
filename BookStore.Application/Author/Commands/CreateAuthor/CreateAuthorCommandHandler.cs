@@ -17,7 +17,7 @@ public class CreateAuthorCommandHandler : IRequestHandler<CreateAuthorCommand>
 
     public async Task<Unit> Handle(CreateAuthorCommand request, CancellationToken cancellationToken)
     {
-        var author = _mapper.Map<Domain.Entities.Authors>(request);
+        var author = _mapper.Map<Domain.Entities.Author>(request);
         await _authorRepository.Create(author);
         return Unit.Value;
     }

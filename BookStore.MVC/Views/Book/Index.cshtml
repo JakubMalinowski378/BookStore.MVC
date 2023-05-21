@@ -47,12 +47,12 @@
             </td>
             <td>
                 @{
-                    var genres = String.Join(", ", item.Genres.Select(x => x.Genre));
+                    var genres = String.Join(", ", item.Genres.Select(x => x.Value));
                 }
                 @Html.DisplayFor(modelItem => genres)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Language.Language)
+                @Html.DisplayFor(modelItem => item.Language.Value)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PageNumbers)

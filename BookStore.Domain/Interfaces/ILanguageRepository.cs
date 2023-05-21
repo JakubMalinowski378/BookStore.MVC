@@ -4,5 +4,5 @@ namespace BookStore.Domain.Interfaces;
 
 public interface ILanguageRepository
 {
-    Task<IEnumerable<Languages>> GetAll();
+    Task<IEnumerable<Language>> GetAll();
 }

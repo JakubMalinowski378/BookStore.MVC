@@ -2,14 +2,14 @@
 
 namespace BookStore.Domain.Entities;
 
-public class Books
+public class Book
 {
     public int Id { get; set; }
-    public List<Genres> Genres { get; set; } = new();
+    public List<Genre> Genres { get; set; } = new();
     public int LanguageId { get; set; }
-    public Languages Language { get; set; } = default!;
+    public Language Language { get; set; } = default!;
     public int AuthorId { get; set; }
-    public Authors Author { get; set; } = default!;
+    public Author Author { get; set; } = default!;
     public string UserId { get; set; } = default!;
     public IdentityUser User { get; set; } = default!;
     public string Title { get; set; } = default!;

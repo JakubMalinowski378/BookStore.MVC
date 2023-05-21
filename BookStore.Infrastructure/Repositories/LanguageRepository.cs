@@ -14,7 +14,7 @@ public class LanguageRepository : ILanguageRepository
         _dbContext = dbContext;
     }
 
-    public async Task<IEnumerable<Languages>> GetAll()
+    public async Task<IEnumerable<Language>> GetAll()
         => await _dbContext.Languages
         .ToListAsync();
 }

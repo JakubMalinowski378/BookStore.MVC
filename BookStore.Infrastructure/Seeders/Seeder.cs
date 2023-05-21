@@ -68,11 +68,11 @@ public class Seeder
         var users = _dbContext.Users.ToList();
         var rnd = new Random();
         var faker = new Faker();
-        var books = new Books[100];
+        var books = new Book[100];
         for(int i = 0; i < 100; i++)
         {
             int genreCount = rnd.Next(1, 4);
-            var bookGenres = new List<Genres>();
+            var bookGenres = new List<Genre>();
             while(bookGenres.Count < genreCount)
             {
                 var index = rnd.Next(genres.Count - 1);
@@ -80,7 +80,7 @@ public class Seeder
                     bookGenres.Add(genres[index]);
             }
             var user = users[rnd.Next(users.Count - 1)];
-            books[i] = new Books()
+            books[i] = new Book()
             {
                 Genres = bookGenres,
                 Language = languages[rnd.Next(languages.Count - 1)],
@@ -98,50 +98,50 @@ public class Seeder
 
     private async Task SeedAuthors()
     {
-        var authors = new Authors[]
+        var authors = new Author[]
         {
-            new Authors(){ FirstName="Franz", LastName="Kafka" },
-            new Authors(){ FirstName="William", LastName="Shakespeare" },
-            new Authors(){ FirstName="Fiodor", LastName="Dostojewski" },
-            new Authors(){ FirstName="George", LastName="Orwell" },
-            new Authors(){ FirstName="Mark", LastName="Twain" },
-            new Authors(){ FirstName="Joseph", LastName="Conrad" },
-            new Authors(){ FirstName="Adam", LastName="Mickiewicz" }
+            new Author(){ FirstName="Franz", LastName="Kafka" },
+            new Author(){ FirstName="William", LastName="Shakespeare" },
+            new Author(){ FirstName="Fiodor", LastName="Dostojewski" },
+            new Author(){ FirstName="George", LastName="Orwell" },
+            new Author(){ FirstName="Mark", LastName="Twain" },
+            new Author(){ FirstName="Joseph", LastName="Conrad" },
+            new Author(){ FirstName="Adam", LastName="Mickiewicz" }
         };
         await _dbContext.Authors.AddRangeAsync(authors);
     }
 
     private async Task SeedLanguages()
     {
-        var languages = new Languages[]
+        var languages = new Language[]
         {
-            new Languages(){ Language="Polish" },
-            new Languages(){ Language="English" },
-            new Languages(){ Language="Deutsch" },
-            new Languages(){ Language="French" },
-            new Languages(){ Language="Spanish" },
+            new Language(){ Value="Polish" },
+            new Language(){ Value="English" },
+            new Language(){ Value="Deutsch" },
+            new Language(){ Value="French" },
+            new Language(){ Value="Spanish" },
         };
         await _dbContext.Languages.AddRangeAsync(languages);
     }
 
     private async Task SeedGenres()
     {
-        var genres = new Genres[]
+        var genres = new Genre[]
         {
-            new Genres(){ Genre="Action" },
-            new Genres(){ Genre="Adventure" },
-            new Genres(){ Genre="Classic" },
-            new Genres(){ Genre="Comic" },
-            new Genres(){ Genre="Detective" },
-            new Genres(){ Genre="Fantasy" },
-            new Genres(){ Genre="Horror" },
-            new Genres(){ Genre="LiteraryFiction" },
-            new Genres(){ Genre="Romance" },
-            new Genres(){ Genre="ScienceFiction" },
-            new Genres(){ Genre="ShortStory" },
-            new Genres(){ Genre="Thriller" },
-            new Genres(){ Genre="Biography" },
-            new Genres(){ Genre="Cookbook" }
+            new Genre(){ Value="Action" },
+            new Genre(){ Value="Adventure" },
+            new Genre(){ Value="Classic" },
+            new Genre(){ Value="Comic" },
+            new Genre(){ Value="Detective" },
+            new Genre(){ Value="Fantasy" },
+            new Genre(){ Value="Horror" },
+            new Genre(){ Value="LiteraryFiction" },
+            new Genre(){ Value="Romance" },
+            new Genre(){ Value="ScienceFiction" },
+            new Genre(){ Value="ShortStory" },
+            new Genre(){ Value="Thriller" },
+            new Genre(){ Value="Biography" },
+            new Genre(){ Value="Cookbook" }
         };
         await _dbContext.Genres.AddRangeAsync(genres);
     }

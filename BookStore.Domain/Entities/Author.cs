@@ -1,6 +1,6 @@
 ﻿namespace BookStore.Domain.Entities;
 
-public class Authors
+public class Author
 {
     public int Id { get; set; }
     public string FirstName { get; set; } = default!;

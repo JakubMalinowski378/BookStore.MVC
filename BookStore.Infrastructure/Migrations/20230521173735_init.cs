@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BookStore.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -70,7 +70,7 @@ namespace BookStore.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Genre = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Value = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -83,7 +83,7 @@ namespace BookStore.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Language = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Value = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -136,8 +136,8 @@ namespace BookStore.Infrastructure.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
@@ -181,8 +181,8 @@ namespace BookStore.Infrastructure.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -235,7 +235,7 @@ namespace BookStore.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BooksGenres",
+                name: "BookGenre",
                 columns: table => new
                 {
                     BooksId = table.Column<int>(type: "int", nullable: false),
@@ -243,15 +243,15 @@ namespace BookStore.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BooksGenres", x => new { x.BooksId, x.GenresId });
+                    table.PrimaryKey("PK_BookGenre", x => new { x.BooksId, x.GenresId });
                     table.ForeignKey(
-                        name: "FK_BooksGenres_Books_BooksId",
+                        name: "FK_BookGenre_Books_BooksId",
                         column: x => x.BooksId,
                         principalTable: "Books",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_BooksGenres_Genres_GenresId",
+                        name: "FK_BookGenre_Genres_GenresId",
                         column: x => x.GenresId,
                         principalTable: "Genres",
                         principalColumn: "Id",
@@ -298,6 +298,11 @@ namespace BookStore.Infrastructure.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_BookGenre_GenresId",
+                table: "BookGenre",
+                column: "GenresId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Books_AuthorId",
                 table: "Books",
                 column: "AuthorId");
@@ -311,11 +316,6 @@ namespace BookStore.Infrastructure.Migrations
                 name: "IX_Books_UserId",
                 table: "Books",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_BooksGenres_GenresId",
-                table: "BooksGenres",
-                column: "GenresId");
         }
 
         /// <inheritdoc />
@@ -337,7 +337,7 @@ namespace BookStore.Infrastructure.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "BooksGenres");
+                name: "BookGenre");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

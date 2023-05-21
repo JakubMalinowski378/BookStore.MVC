@@ -4,5 +4,5 @@ namespace BookStore.Domain.Interfaces;
 
 public interface IGenreRepository
 {
-    Task<IEnumerable<Genres>> GetAll();
+    Task<IEnumerable<Genre>> GetAll();
 }

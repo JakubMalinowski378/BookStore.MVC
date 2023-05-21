@@ -4,7 +4,7 @@ using MediatR;
 
 namespace BookStore.Application.Author.Queries.GetAuthorById;
 
-public class GetAuthorByIdQueryHandler : IRequestHandler<GetAuthorByIdQuery, Domain.Entities.Authors>
+public class GetAuthorByIdQueryHandler : IRequestHandler<GetAuthorByIdQuery, Domain.Entities.Author>
 {
     private readonly IMapper _mapper;
     private readonly IAuthorRepository _authorRepository;
@@ -15,10 +15,10 @@ public class GetAuthorByIdQueryHandler : IRequestHandler<GetAuthorByIdQuery, Dom
         _authorRepository = authorRepository;
     }
 
-    public async Task<Domain.Entities.Authors> Handle(GetAuthorByIdQuery request, CancellationToken cancellationToken)
+    public async Task<Domain.Entities.Author> Handle(GetAuthorByIdQuery request, CancellationToken cancellationToken)
     {
         var author = await _authorRepository.GetById(request.Id);
-        var dto = _mapper.Map<Domain.Entities.Authors>(author);
+        var dto = _mapper.Map<Domain.Entities.Author>(author);
         return dto;
     }
 }

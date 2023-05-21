@@ -40,7 +40,7 @@ public class BookController : Controller
             authorsCredentials.Select(a =>
             new { a.Id, FirstAndLastName=$"{a.FirstName} {a.LastName}" }
             ), "Id", "FirstAndLastName");
-        ViewData["Languages"] = new SelectList(languages, "Id", "Language");
+        ViewData["Languages"] = new SelectList(languages, "Id", "Value");
         var model = new CreateBookDto()
         {
             Genres = genres.ToList()
@@ -60,8 +60,8 @@ public class BookController : Controller
             authorsCredentials.Select(a =>
             new { a.Id, FirstAndLastName = $"{a.FirstName} {a.LastName}" }
             ), "Id", "FirstAndLastName");
-            ViewData["Genres"] = genres.Select(g => new { g.Id, g.Genre });
-            ViewData["Languages"] = new SelectList(languages, "Id", "Language");
+            ViewData["Genres"] = genres.Select(g => new { g.Id, g.Value });
+            ViewData["Languages"] = new SelectList(languages, "Id", "Value");
             return View(command);
         }
         await _mediator.Send(command);

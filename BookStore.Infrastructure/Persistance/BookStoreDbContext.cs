@@ -10,16 +10,16 @@ public class BookStoreDbContext : IdentityDbContext
 
 	}
 
-	public DbSet<Domain.Entities.Authors> Authors { get; set; }
-	public DbSet<Domain.Entities.Books> Books { get; set; }
-    public DbSet<Domain.Entities.Genres> Genres { get; set; }
-    public DbSet<Domain.Entities.Languages> Languages { get; set; }
+	public DbSet<Domain.Entities.Author> Authors { get; set; }
+	public DbSet<Domain.Entities.Book> Books { get; set; }
+    public DbSet<Domain.Entities.Genre> Genres { get; set; }
+    public DbSet<Domain.Entities.Language> Languages { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
 
-		builder.Entity<Domain.Entities.Books>(eb =>
+		builder.Entity<Domain.Entities.Book>(eb =>
 		{
 			eb.HasOne(b => b.Author);
 

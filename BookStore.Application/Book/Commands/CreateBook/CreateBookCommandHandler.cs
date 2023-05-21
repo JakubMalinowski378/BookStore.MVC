@@ -27,7 +27,7 @@ public class CreateBookCommandHandler : IRequestHandler<CreateBookCommand>
     public async Task<Unit> Handle(CreateBookCommand request, CancellationToken cancellationToken)
     {
         var currentUser = _userContext.GetCurrentUser() ?? throw new UnauthorizedAccessException();
-        var book = _mapper.Map<Books>(request);
+        var book = _mapper.Map<Domain.Entities.Book>(request);
         var genres = await _genreRepository.GetAll();
         var genresList = genres.Where(x => request.GenresIds!.Contains(x.Id)).ToList();
         book.Genres = genresList;
